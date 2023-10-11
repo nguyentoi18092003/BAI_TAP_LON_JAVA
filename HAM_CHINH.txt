@@ -1,0 +1,47 @@
+CREATE DATABASE QLSV;
+DROP DATABASE IF EXISTS QLSV;
+USE QLSV;
+DROP TABLE IF EXISTS diemhp;
+CREATE TABLE NGANH (
+    MaNganh VARCHAR(15) PRIMARY KEY,
+    TenNganh NVARCHAR(30)
+);
+CREATE TABLE LOP (
+    MaLop VARCHAR(15) PRIMARY KEY,
+    MaNganh VARCHAR(15),
+    FOREIGN KEY (MaNganh) REFERENCES NGANH(MaNganh)
+);
+CREATE TABLE SINHVIEN (
+    MaSV VARCHAR(15) PRIMARY KEY,
+    HoLot NVARCHAR(30) NOT NULL,
+    Ten Nvarchar(30) not null,
+	MaLop VARCHAR(15),
+    FOREIGN KEY (MaLop) REFERENCES LOP(MaLop)
+);
+CREATE TABLE HOCPHAN (
+    MaMH VARCHAR(15) PRIMARY KEY,
+    TenMonHoc NVARCHAR(30) NOT NULL,
+    Nhom varchar(30) not null,
+     MaNganh VARCHAR(15),
+	FOREIGN KEY (MaNganh) REFERENCES NGANH(MaNganh)
+    
+);
+CREATE TABLE DIEMHP (
+    MaSV VARCHAR(15) NOT NULL,
+    MaMH VARCHAR(15) NOT NULL,
+    DiemKT varchar(15),
+    DiemCC  varchar(15),
+    DiemThi  varchar(15),
+    PRIMARY KEY (MaSV, MaMH),
+    FOREIGN KEY (MaSV) REFERENCES SINHVIEN(MaSV),
+    FOREIGN KEY (MaMH) REFERENCES HOCPHAN(MaMH)
+    
+);
+
+
+
+select *from nganh;
+select *from lop;
+select *from sinhVien;
+select *from hocphan;
+select *from diemhp;
